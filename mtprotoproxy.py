@@ -1929,8 +1929,8 @@ async def get_encrypted_cert(host, port, server_name):
         record4_type, record4 = await get_tls_record(reader)
         if record4_type != 23:
             return b""
-        msg = ("The MASK_HOST %s sent some TLS record before certificate record, this makes the " +
-               "proxy more detectable") % config.MASK_HOST
+        msg = ("这个 MASK_HOST %s 在证书记录之前发送了一些 TLS 记录，这使得 " +
+               "代理更易被检测到") % config.MASK_HOST
         print_err(msg)
 
         return record4
