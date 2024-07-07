@@ -13,4 +13,4 @@ services:
       options:
         max-file: "10"
         max-size: "10m"
-    mem_limit: 1024m
+    mem_limit: 2048m
