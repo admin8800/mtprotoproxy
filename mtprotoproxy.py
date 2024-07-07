@@ -1929,7 +1929,7 @@ async def get_encrypted_cert(host, port, server_name):
         record4_type, record4 = await get_tls_record(reader)
         if record4_type != 23:
             return b""
-        msg = ("这个 MASK_HOST %s 在证书记录之前发送了一些 TLS 记录，这使得 " +
+        msg = ("此域名 %s 在证书记录之前发送了一些 TLS 记录，这使得 " +
                "代理更易被检测到") % config.MASK_HOST
         print_err(msg)
 
@@ -1960,7 +1960,7 @@ async def get_mask_host_cert_len():
                     print_err(msg)
                 elif len(cert) != fake_cert_len:
                     fake_cert_len = len(cert)
-                    print_err("获得证书 MASK_HOST %s, 它的长度是 %d" %
+                    print_err("获得证书 %s, 它的长度是 %d" %
                               (config.MASK_HOST, fake_cert_len))
             else:
                 print_err("The MASK_HOST %s 不是 TLS 1.3 主机，不建议这样做" %
@@ -2174,7 +2174,7 @@ def print_tg_info():
 
     if config.TLS_DOMAIN == "www.swift.com":
         print("使用了默认域名 www.swift.com", flush=True)
-        msg = "你应该使用随机的现有域名，恶意流量会在那里被代理"
+        msg = "你应该使用随机的现有域名，这样才能减少被墙的几率"
         print(msg, flush=True)
         print_default_warning = True
 
