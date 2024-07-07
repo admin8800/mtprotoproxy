@@ -188,7 +188,7 @@ def init_config():
     conf_dict.setdefault("PROXY_PROTOCOL", False)
 
     # set the tls domain for the proxy, has an influence only on starting message
-    conf_dict.setdefault("TLS_DOMAIN", "www.google.com")
+    conf_dict.setdefault("TLS_DOMAIN", "www.swift.com")
 
     # enable proxying bad clients to some host
     conf_dict.setdefault("MASK", True)
@@ -2172,8 +2172,8 @@ def print_tg_info():
             print("You can change it to this random secret:", random_secret, flush=True)
             print_default_warning = True
 
-    if config.TLS_DOMAIN == "www.google.com":
-        print("The default TLS_DOMAIN www.google.com is used, this is not recommended", flush=True)
+    if config.TLS_DOMAIN == "www.swift.com":
+        print("The default TLS_DOMAIN www.swift.com is used, this is not recommended", flush=True)
         msg = "You should use random existing domain instead, bad clients are proxied there"
         print(msg, flush=True)
         print_default_warning = True
