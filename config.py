@@ -1,27 +1,27 @@
-PORT = 443
+PORT = 8443
 
-# name -> secret (32 hex chars)
+# 密钥（32个十六进制字符）
 USERS = {
-    "tg":  "00000000000000000000000000000001",
+    "tg":  "7b1Ce195b0e69175AF5BE51bd7bfAcE5",
     # "tg2": "0123456789abcdef0123456789abcdef",
 }
 
 MODES = {
-    # Classic mode, easy to detect
+    # 经典模式，容易被检测
     "classic": False,
 
-    # Makes the proxy harder to detect
-    # Can be incompatible with very old clients
-    "secure": False,
+    # TLS伪装加密
+    # 可能与非常旧的客户端不兼容
+    "secure": True,
 
-    # Makes the proxy even more hard to detect
-    # Can be incompatible with old clients
+    # 使代理更难被检测到
+    # 可能与旧客户端不兼容
     "tls": True
 }
 
-# The domain for TLS mode, bad clients are proxied there
-# Use random existing domain, proxy checks it on start
-# TLS_DOMAIN = "www.google.com"
+# 伪装域名
+TLS_DOMAIN = "www.swift.com"
 
-# Tag for advertising, obtainable from @MTProxybot
+# 广告标签，可从 @MTProxybot 获取
 # AD_TAG = "3c09c680b76ee91a4c25ad51f742267d"
+
