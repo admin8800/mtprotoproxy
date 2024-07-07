@@ -1,9 +1,10 @@
+# 连接端口
 PORT = 8443
 
 # 密钥（32个十六进制字符）
 USERS = {
-    "tg":  "7b1Ce195b0e69175AF5BE51bd7bfAcE5",
-    # "tg2": "0123456789abcdef0123456789abcdef",
+    "tg":  "bc6dddb180509c5b18cb51d17d849455",
+    # "tg2": "fa33e8ed3523ce760c241129c66153b6",
 }
 
 MODES = {
