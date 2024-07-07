@@ -1,5 +1,8 @@
 ## Python版TG代理 ##
-适配/amd64/arm64/arm/v7架构
+>适配/amd64/arm64/arm/v7架构
+>支持ipv4和ipv6
+>自带TLS伪装
+>支持TG频道推广（需要TG老号）
 
 ### 安装git和docker-compose
 
