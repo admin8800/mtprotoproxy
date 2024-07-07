@@ -11,7 +11,7 @@ MODES = {
     # 经典模式，容易被墙
     "classic": False,
 
-    # 加密模式
+    # 混淆伪装
     "secure": True,
 
     # TLS加密
