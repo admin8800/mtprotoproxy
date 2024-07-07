@@ -1,4 +1,5 @@
-# Async MTProto Proxy #
+## Python版TG代理 ##
+适配/amd64/arm64/arm/v7架构
 
 ### 安装git和docker-compose
 
