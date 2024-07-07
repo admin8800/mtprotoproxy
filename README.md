@@ -31,3 +31,17 @@ docker compose up -d
 ```
 docker logs mtp
 ```
+
+#### 重启
+```
+docker restart mtp
+```
+
+#### 停止
+```
+docker stop mtp
+```
+#### 删除
+```
+docker rm -f mtp
+```
