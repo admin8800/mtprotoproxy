@@ -16,6 +16,8 @@ git clone https://github.com/admin8800/mtprotoproxy.git
 ```
 ### 修改`config.py`配置
 
+32位密钥可在[这个网站在线生成](https://www.bejson.com/math/hex_gen/)
+
 ### 一键运行
 ```
 cd mtprotoproxy
