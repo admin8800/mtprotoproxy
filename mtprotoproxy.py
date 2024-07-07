@@ -1960,7 +1960,7 @@ async def get_mask_host_cert_len():
                     print_err(msg)
                 elif len(cert) != fake_cert_len:
                     fake_cert_len = len(cert)
-                    print_err("Got cert from the MASK_HOST %s, its length is %d" %
+                    print_err("获得证书 MASK_HOST %s, 它的长度是 %d" %
                               (config.MASK_HOST, fake_cert_len))
             else:
                 print_err("The MASK_HOST %s 不是 TLS 1.3 主机，不建议这样做" %
@@ -2173,7 +2173,7 @@ def print_tg_info():
             print_default_warning = True
 
     if config.TLS_DOMAIN == "www.swift.com":
-        print("默认使用 TLS_DOMAIN www.swift.com，不推荐使用", flush=True)
+        print("使用了默认域名 www.swift.com", flush=True)
         msg = "你应该使用随机的现有域名，恶意流量会在那里被代理"
         print(msg, flush=True)
         print_default_warning = True
@@ -2224,7 +2224,7 @@ def try_setup_uvloop():
     try:
         import uvloop
         asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
-        print_err("Found uvloop, using it for optimal performance")
+        print_err("找到 uvloop，使用它获得最佳性能")
     except ImportError:
         pass
 
