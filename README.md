@@ -14,7 +14,7 @@
 ```
 git clone https://github.com/admin8800/mtprotoproxy.git
 ```
-### 修改`config.py`配置
+### 修改`config.py`文件中的配置
 
 32位数密钥可在[这个网站在线生成](https://www.lzltool.com/Tools/RandomHex)
 
