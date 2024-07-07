@@ -1,6 +1,6 @@
 services:
   mtprotoproxy:
-    image: ghcr.io/admin8800/mtproxy:latest
+    image: ghcr.io/admin8800/mtprotoproxy:latest
     container_name: mtp
     restart: unless-stopped
     network_mode: "host"
