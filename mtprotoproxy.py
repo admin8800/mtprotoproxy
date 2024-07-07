@@ -130,8 +130,8 @@ def init_config():
         if not re.fullmatch("[0-9a-fA-F]{32}", secret):
             fixed_secret = re.sub(r"[^0-9a-fA-F]", "", secret).zfill(32)[:32]
 
-            print_err("Bad secret for user %s, should be 32 hex chars, got %s. " % (user, secret))
-            print_err("Changing it to %s" % fixed_secret)
+            print_err("用户密钥不正确 %s, 应该是 32 个十六进制字符，得到 %s. " % (user, secret))
+            print_err("将其更改为 %s" % fixed_secret)
 
             conf_dict["USERS"][user] = fixed_secret
 
@@ -170,7 +170,7 @@ def init_config():
             modes["secure"] = False
 
     if not modes["classic"] and not modes["secure"] and not modes["tls"]:
-        print_err("No known modes enabled, enabling tls-only mode")
+        print_err("未启用任何已知模式，正在启用 tls-only 模式")
         modes["tls"] = True
 
     if legacy_warning:
@@ -300,7 +300,7 @@ def apply_upstream_proxy_settings():
     # apply socks settings in place
     if config.SOCKS5_HOST and config.SOCKS5_PORT:
         import socks
-        print_err("Socket-proxy mode activated, it is incompatible with advertising and uvloop")
+        print_err("套接字代理模式已激活，与广告和 uvloop 不兼容")
         socks.set_default_proxy(socks.PROXY_TYPE_SOCKS5, config.SOCKS5_HOST, config.SOCKS5_PORT,
                                 username=config.SOCKS5_USER, password=config.SOCKS5_PASS)
         if not hasattr(socket, "origsocket"):
@@ -357,7 +357,7 @@ def try_use_pycrypto_or_pycryptodome_module():
 def use_slow_bundled_cryptography_module():
     import pyaes
 
-    msg = "To make the program a *lot* faster, please install cryptography module: "
+    msg = "为了使程序运行速度更快，请安装加密模块："
     msg += "pip install cryptography\n"
     print(msg, flush=True, file=sys.stderr)
 
@@ -795,7 +795,7 @@ class MTProtoCompactFrameStreamWriter(LayeredStreamWriterBase):
         elif len_div_four < LARGE_PKT_BORGER:
             return self.upstream.write(b'\x7f' + int.to_bytes(len_div_four, 3, 'little') + data)
         else:
-            print_err("Attempted to send too large pkt len =", len(data))
+            print_err("尝试发送的数据包长度过大 =", len(data))
             return 0
 
 
@@ -933,7 +933,7 @@ class ProxyReqStreamWriter(LayeredStreamWriterBase):
         FLAG_QUICKACK = 0x80000000
 
         if len(msg) % 4 != 0:
-            print_err("BUG: attempted to send msg with len %d" % len(msg))
+            print_err("BUG: 尝试发送长度为 len 的消息 %d" % len(msg))
             return 0
 
         flags = FLAG_HAS_AD_TAG | FLAG_MAGIC | FLAG_EXTMODE2
@@ -1249,7 +1249,7 @@ async def handle_handshake(reader, writer):
         ip = peer[0] if peer else "unknown ip"
         peer = await handle_proxy_protocol(reader, peer)
         if not peer:
-            print_err("Client from %s sent bad proxy protocol headers" % ip)
+            print_err("来自客户端 %s 发送了错误的代理协议标头" % ip)
             await handle_bad_client(reader, writer, None)
             return False
 
@@ -1356,13 +1356,13 @@ async def do_direct_handshake(proto_tag, dc_idx, dec_key_and_iv=None):
     try:
         reader_tgt, writer_tgt = await tg_connection_pool.get_connection(dc, TG_DATACENTER_PORT)
     except ConnectionRefusedError as E:
-        print_err("Got connection refused while trying to connect to", dc, TG_DATACENTER_PORT)
+        print_err("尝试连接时被拒绝", dc, TG_DATACENTER_PORT)
         return False
     except ConnectionAbortedError as E:
-        print_err("The Telegram server connection is bad: %d (%s %s) %s" % (dc_idx, addr, port, E))
+        print_err("Telegram 服务器连接不良: %d (%s %s) %s" % (dc_idx, addr, port, E))
         return False
     except (OSError, asyncio.TimeoutError) as E:
-        print_err("Unable to connect to", dc, TG_DATACENTER_PORT)
+        print_err("无法连接到", dc, TG_DATACENTER_PORT)
         return False
 
     while True:
@@ -1550,13 +1550,13 @@ async def do_middleproxy_handshake(proto_tag, dc_idx, cl_ip, cl_port):
         ret = await tg_connection_pool.get_connection(addr, port, middleproxy_handshake)
         reader_tgt, writer_tgt, my_ip, my_port = ret
     except ConnectionRefusedError as E:
-        print_err("The Telegram server %d (%s %s) is refusing connections" % (dc_idx, addr, port))
+        print_err("Telegram 服务器 %d (%s %s) 拒绝连接" % (dc_idx, addr, port))
         return False
     except ConnectionAbortedError as E:
-        print_err("The Telegram server connection is bad: %d (%s %s) %s" % (dc_idx, addr, port, E))
+        print_err("Telegram 服务器连接不良: %d (%s %s) %s" % (dc_idx, addr, port, E))
         return False
     except (OSError, asyncio.TimeoutError) as E:
-        print_err("Unable to connect to the Telegram server %d (%s %s)" % (dc_idx, addr, port))
+        print_err("无法连接到 Telegram 服务器 %d (%s %s)" % (dc_idx, addr, port))
         return False
 
     writer_tgt = ProxyReqStreamWriter(writer_tgt, cl_ip, cl_port, my_ip, my_port, proto_tag)
@@ -1826,7 +1826,7 @@ async def stats_printer():
     while True:
         await asyncio.sleep(config.STATS_PRINT_PERIOD)
 
-        print("Stats for", time.strftime("%d.%m.%Y %H:%M:%S"))
+        print("统计数据", time.strftime("%d.%m.%Y %H:%M:%S"))
         for user, stat in user_stats.items():
             print("%s: %d connects (%d current), %.2f MB, %d msgs" % (
                 user, stat["connects"], stat["curr_connects"],
@@ -1835,20 +1835,20 @@ async def stats_printer():
         print(flush=True)
 
         if last_client_ips:
-            print("New IPs:")
+            print("新的客户端IP:")
             for ip in last_client_ips:
                 print(ip)
             print(flush=True)
             last_client_ips.clear()
 
         if last_clients_with_time_skew:
-            print("Clients with time skew (possible replay-attackers):")
+            print("存在时间偏差的客户端（可能存在重放攻击者）:")
             for ip, skew_minutes in last_clients_with_time_skew.items():
                 print("%s, clocks were %d minutes behind" % (ip, skew_minutes))
             print(flush=True)
             last_clients_with_time_skew.clear()
         if last_clients_with_same_handshake:
-            print("Clients with duplicate handshake (likely replay-attackers):")
+            print("具有重复握手的客户端（可能是重放攻击者）:")
             for ip, times in last_clients_with_same_handshake.items():
                 print("%s, %d times" % (ip, times))
             print(flush=True)
@@ -1955,7 +1955,7 @@ async def get_mask_host_cert_len():
             cert = await asyncio.wait_for(task, timeout=GET_CERT_TIMEOUT)
             if cert:
                 if len(cert) < MIN_CERT_LEN:
-                    msg = ("The MASK_HOST %s returned several TLS records, this is not supported" %
+                    msg = ("The MASK_HOST %s 返回了多条 TLS 记录，这是不支持的" %
                            config.MASK_HOST)
                     print_err(msg)
                 elif len(cert) != fake_cert_len:
@@ -1963,16 +1963,16 @@ async def get_mask_host_cert_len():
                     print_err("Got cert from the MASK_HOST %s, its length is %d" %
                               (config.MASK_HOST, fake_cert_len))
             else:
-                print_err("The MASK_HOST %s is not TLS 1.3 host, this is not recommended" %
+                print_err("The MASK_HOST %s 不是 TLS 1.3 主机，不建议这样做" %
                           config.MASK_HOST)
         except ConnectionRefusedError:
-            print_err("The MASK_HOST %s is refusing connections, this is not recommended" %
+            print_err("The MASK_HOST %s 拒绝连接，不建议这样做" %
                       config.MASK_HOST)
         except (TimeoutError, asyncio.TimeoutError):
-            print_err("Got timeout while getting TLS handshake from MASK_HOST %s" %
+            print_err("获取 TLS 握手时超时 MASK_HOST %s" %
                       config.MASK_HOST)
         except Exception as E:
-            print_err("Failed to connect to MASK_HOST %s: %s" % (
+            print_err("无法连接到 MASK_HOST %s: %s" % (
                       config.MASK_HOST, E))
 
         await asyncio.sleep(config.GET_CERT_LEN_PERIOD)
@@ -1998,19 +1998,19 @@ async def get_srv_time():
                 now_time = datetime.datetime.utcnow()
                 is_time_skewed = (now_time-srv_time).total_seconds() > MAX_TIME_SKEW
                 if is_time_skewed and config.USE_MIDDLE_PROXY and not disable_middle_proxy:
-                    print_err("Time skew detected, please set the clock")
+                    print_err("检测到时间偏差，请更新系统时间")
                     print_err("Server time:", srv_time, "your time:", now_time)
-                    print_err("Disabling advertising to continue serving")
-                    print_err("Putting down the shields against replay attacks")
+                    print_err("停用广告以继续投放")
+                    print_err("放下防御重放攻击的盾牌")
 
                     disable_middle_proxy = True
                     want_to_reenable_advertising = True
                 elif not is_time_skewed and want_to_reenable_advertising:
-                    print_err("Time is ok, reenabling advertising")
+                    print_err("系统时间正确，重新启用广告")
                     disable_middle_proxy = False
                     want_to_reenable_advertising = False
         except Exception as E:
-            print_err("Error getting server time", E)
+            print_err("获取服务器时间错误", E)
 
         await asyncio.sleep(config.GET_TIME_PERIOD)
 
@@ -2057,7 +2057,7 @@ async def update_middle_proxy_info():
                 raise Exception("no proxy data")
             TG_MIDDLE_PROXIES_V4 = v4_proxies
         except Exception as E:
-            print_err("Error updating middle proxy list:", E)
+            print_err("更新中间代理列表时出错：", E)
 
         try:
             v6_proxies = await get_new_proxies(PROXY_INFO_ADDR_V6)
@@ -2073,9 +2073,9 @@ async def update_middle_proxy_info():
                 raise Exception("no secret")
             if secret != PROXY_SECRET:
                 PROXY_SECRET = secret
-                print_err("Middle proxy secret updated")
+                print_err("中间代理密钥已更新")
         except Exception as E:
-            print_err("Error updating middle proxy secret, using old", E)
+            print_err("更新中间代理密钥时出错，使用旧的", E)
 
         await asyncio.sleep(config.PROXY_INFO_UPDATE_PERIOD)
 
@@ -2108,11 +2108,11 @@ def init_ip_info():
         my_ip_info["ipv6"] = None
 
     if my_ip_info["ipv6"] and (config.PREFER_IPV6 or not my_ip_info["ipv4"]):
-        print_err("IPv6 found, using it for external communication")
+        print_err("发现 IPv6，正在使用它进行外部通信")
 
     if config.USE_MIDDLE_PROXY:
         if not my_ip_info["ipv4"] and not my_ip_info["ipv6"]:
-            print_err("Failed to determine your ip, advertising disabled")
+            print_err("无法确定您的 IP，广告已禁用")
             disable_middle_proxy = True
 
 
@@ -2123,9 +2123,9 @@ def print_tg_info():
     print_default_warning = False
 
     if config.PORT == 3256:
-        print("The default port 3256 is used, this is not recommended", flush=True)
+        print("使用了默认端口3256，不推荐使用", flush=True)
         if not config.MODES["classic"] and not config.MODES["secure"]:
-            print("Since you have TLS only mode enabled the best port is 443", flush=True)
+            print("由于您启用了仅 TLS 模式，因此最佳端口是 443", flush=True)
         print_default_warning = True
 
     if not config.MY_DOMAIN:
@@ -2164,22 +2164,22 @@ def print_tg_info():
                 proxy_links.append({"user": user, "link": tls_link})
                 print("{}: {}".format(user, tls_link), flush=True)
 
-        if secret in ["00000000000000000000000000000000", "0123456789abcdef0123456789abcdef",
-                      "00000000000000000000000000000001"]:
-            msg = "The default secret {} is used, this is not recommended".format(secret)
+        if secret in ["00000000000000000000000000000000", "bc6dddb180509c5b18cb51d17d849455",
+                      "fa33e8ed3523ce760c241129c66153b6"]:
+            msg = "使用默认密钥 {}，不推荐使用".format(secret)
             print(msg, flush=True)
             random_secret = "".join(myrandom.choice("0123456789abcdef") for i in range(32))
-            print("You can change it to this random secret:", random_secret, flush=True)
+            print("您可以将其更改为这个随机密钥:", random_secret, flush=True)
             print_default_warning = True
 
     if config.TLS_DOMAIN == "www.swift.com":
-        print("The default TLS_DOMAIN www.swift.com is used, this is not recommended", flush=True)
-        msg = "You should use random existing domain instead, bad clients are proxied there"
+        print("默认使用 TLS_DOMAIN www.swift.com，不推荐使用", flush=True)
+        msg = "你应该使用随机的现有域名，恶意流量会在那里被代理"
         print(msg, flush=True)
         print_default_warning = True
 
     if print_default_warning:
-        print_err("Warning: one or more default settings detected")
+        print_err("警告：检测到一个或多个默认设置")
 
 
 def setup_files_limit():
