@@ -10,6 +10,9 @@ git clone https://github.com/admin8800/mtprotoproxy.git
 
 ### 一键运行
 ```
+cd mtprotoproxy
+```
+```
 docker compose up -d
 ```
 
