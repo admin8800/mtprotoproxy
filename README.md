@@ -8,7 +8,7 @@
 >
 >支持TG频道推广（需要TG老号）
 
-### 安装git和docker-compose
+### 自行安装Git和Docker-compose
 
 ### 下载项目
 ```
