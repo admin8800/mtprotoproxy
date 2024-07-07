@@ -14,7 +14,7 @@
 ```
 git clone https://github.com/admin8800/mtprotoproxy.git
 ```
-#### 修改`config.py`配置
+### 修改`config.py`配置
 
 ### 一键运行
 ```
