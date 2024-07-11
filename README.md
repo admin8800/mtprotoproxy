@@ -24,7 +24,7 @@ git clone https://github.com/admin8800/mtprotoproxy.git
 
 #### 32位数密钥可在[这个网站在线生成](https://www.lzltool.com/Tools/RandomHex)
 
-### 一键运行
+### 运行
 ```
 cd mtprotoproxy
 ```
