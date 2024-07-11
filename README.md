@@ -10,7 +10,7 @@
 
 ## 一键脚本
 ```
-bash <(curl -sSL https://raw.githubusercontent.com/admin8800/mtprotoproxy/main/mtproxy.sh)
+bash <(curl -sSL https://raw.githubusercontent.com/admin8800/mtprotoproxy/master/mtproxy.sh)
 ```
 ---
 
