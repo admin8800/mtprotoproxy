@@ -148,7 +148,7 @@ Download(){
     curl -sO https://raw.githubusercontent.com/admin8800/mtprotoproxy/master/mtproxy.py
 
     cat >${mtproxy_conf} <<-EOF
-PORT = 443
+PORT = 8443
 
 # 密匙 -> secret（32 个十六进制字符）
 USERS = {
@@ -159,17 +159,14 @@ MODES = {
     # 经典模式，易于检测
     "classic": False,
 
-    # 使代理服务器更难检测
-    # 可能与非常老的客户端不兼容
-    "secure": False,
+    # 混淆伪装
+    "secure": True,
 
-    # 使代理更难被发现
-    # 可能与旧客户端不兼容
+    # TLS加密
     "tls": True
 }
 
-# TLS 模式的域，不良客户端在此被代理
-# 使用随机的现有域，代理会在启动时检查它
+# TLS伪装域域名
 # TLS_DOMAIN = "www.cloudflare.com"
 
 # 用于广告的标签，可从 @MTProxybot 获取
@@ -179,7 +176,7 @@ EOF
 cat >${mtproxy_ini} <<-EOF
 IPv4=$IPv4
 IPv6=$IPv6
-PORT=443
+PORT=8443
 SECURE=ee65ae12e414c319fb6aeef9924290825a6974756e65732e6170706c652e636f6d
 TAG=
 EOF
