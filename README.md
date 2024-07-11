@@ -8,9 +8,15 @@
 >
 >支持TG频道推广（需要TG老号）
 
-### 自行安装Git和Docker-compose
+## 一键脚本
+```
+bash <(curl -sSL https://raw.githubusercontent.com/admin8800/mtprotoproxy/main/mtproxy.sh)
+```
+---
 
-### 下载项目
+## Docker部署
+
+### 下载项目(自行安装Git和Docker-compose)
 ```
 git clone https://github.com/admin8800/mtprotoproxy.git
 ```
