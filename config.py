@@ -11,10 +11,10 @@ MODES = {
     # 经典模式，容易被墙
     "classic": False,
 
-    # 混淆伪装
+    # 流量混淆
     "secure": True,
 
-    # TLS加密
+    # TLS伪装
     "tls": True
 }
 
