@@ -20,14 +20,15 @@ bash <(curl -sSL https://raw.githubusercontent.com/admin8800/mtprotoproxy/master
 ```
 git clone https://github.com/admin8800/mtprotoproxy.git
 ```
+```
+cd mtprotoproxy
+```
 #### 修改`config.py`文件中的配置
 
 #### 32位数密钥可在[这个网站在线生成](https://www.lzltool.com/Tools/RandomHex)
 
 ### 运行
-```
-cd mtprotoproxy
-```
+
 ```
 docker compose up -d
 ```
