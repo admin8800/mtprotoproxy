@@ -12,7 +12,7 @@ MODES = {
     "classic": False,
 
     # 流量混淆
-    "secure": False,
+    "secure": True,
 
     # TLS伪装
     "tls": True
