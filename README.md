@@ -27,28 +27,21 @@ cd mtprotoproxy
 
 #### 32位数密钥可在[这个网站在线生成](https://www.lzltool.com/Tools/RandomHex)
 
-### 启动运行
+#### 启动运行
 
 ```
 docker compose up -d
 ```
 
-### 查看链接和日志
+#### 查看链接和日志
 
 ```
 docker logs mtp
 ```
 
-#### 重启
-```
-docker restart mtp
-```
+- 重启 `docker restart mtp`
 
-#### 停止
-```
-docker stop mtp
-```
-#### 删除
-```
-docker rm -f mtp
-```
+- 停止 `docker stop mtp`
+
+- 删除 `docker rm -f mtp`
+
