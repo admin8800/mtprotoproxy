@@ -14,7 +14,7 @@ MODES = {
     # 流量混淆
     "secure": True,
 
-    # TLS伪装
+    # TLS加密
     "tls": True
 }
 
