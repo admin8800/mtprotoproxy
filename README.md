@@ -16,7 +16,10 @@ bash <(curl -sSL https://raw.githubusercontent.com/admin8800/mtprotoproxy/master
 
 ## 🟢Docker部署（建议使用）
 
-### 下载项目(自行安装Git和Docker-compose)
+> 自行安装`git`和`docker`
+
+### 下载项目
+
 ```
 git clone https://github.com/admin8800/mtprotoproxy.git
 ```
