@@ -8,13 +8,13 @@
 >
 >支持TG频道推广（需要TG老号）
 
-## 🟢一键脚本
+### 🟢一键脚本
 ```
 bash <(curl -sSL https://raw.githubusercontent.com/admin8800/mtprotoproxy/master/mtproxy.sh)
 ```
 ---
 
-## 🟢Docker部署
+## 🟢Docker部署（建议使用）
 
 ### 下载项目(自行安装Git和Docker-compose)
 ```
