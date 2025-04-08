@@ -1,4 +1,4 @@
-## ✨Python版TG代理 ##
+## ✨Python版TG代理
 
 >适配/amd64/arm64/armv7架构
 >
@@ -8,13 +8,8 @@
 >
 >支持TG频道推广（需要TG老号）
 
-### 🟢一键脚本
-```
-bash <(curl -sSL https://raw.githubusercontent.com/admin8800/mtprotoproxy/master/mtproxy.sh)
-```
----
 
-## 🟢Docker部署（建议使用）
+## 🟢Docker部署
 
 > 自行安装`git`和`docker`
 
