@@ -19,8 +19,7 @@ MODES = {
 }
 
 # 伪装域名
-TLS_DOMAIN = "www.swift.com"
+TLS_DOMAIN = "www.xbox.com"
 
 #广告标签，可从 @MTProxybot 获取
 #AD_TAG = "3c09c680b76ee91a4c25ad51f742267d"
-
